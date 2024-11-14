@@ -1,3 +1,4 @@
+using Assets.Scripts.Features.SceneLoader;
 using Zenject;
 
 namespace Assets.Scripts.Infrastructure
@@ -14,7 +15,10 @@ namespace Assets.Scripts.Infrastructure
 
         private void CreateInitializationPipe()
         {
-            
+            _initializationCommandExecutor.Add<MessageFeatureInitCommand>();
+            _initializationCommandExecutor.Add<AssetFeatureInitCommand>();
+            _initializationCommandExecutor.Add<SceneFeatureInitCommand>();
+            _initializationCommandExecutor.Add<PointFeatureInitCommand>();
         }
     }
 }
