@@ -14,5 +14,7 @@ public class Test : MonoBehaviour
     private void Test1()
     {
         broker.Publish(new PointMessage(transform));
+        broker.Publish(new OctopusSpawnMessage());
+        broker.Publish(new StartInputMessage());
     }
 }
