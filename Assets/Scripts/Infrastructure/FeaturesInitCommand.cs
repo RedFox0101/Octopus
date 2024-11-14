@@ -21,6 +21,7 @@ namespace Assets.Scripts.Infrastructure
             _initializationCommandExecutor.Add<PointFeatureInitCommand>();
             _initializationCommandExecutor.Add<InputFeatureInitCommand>();
             _initializationCommandExecutor.Add<OctopusFeatureInitCommand>();
+            _initializationCommandExecutor.Add<AnimationFeatureInitCommand>();
         }
     }
 }

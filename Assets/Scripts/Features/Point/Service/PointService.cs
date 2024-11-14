@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using System.Linq;
 using UniRx;
 using UnityEngine;
 
-public class PointService 
+public class PointService
 {
     private MessageBroker _messageBroker;
     private PointFactory _pointFactory;
@@ -30,9 +31,9 @@ public class PointService
            }).AddTo(_compositeDisposable);
     }
 
-    private  void SpawnPoints(Transform parent)
+    private void SpawnPoints(Transform parent)
     {
-        var camera= Camera.main;
+        var camera = Camera.main;
         _viewList.Clear();
         Vector2 min = camera.ViewportToWorldPoint(new Vector2(0, 0));
         Vector2 max = camera.ViewportToWorldPoint(new Vector2(1, 1));
@@ -41,7 +42,7 @@ public class PointService
         {
             Vector3 randomPosition = GetRandomPositionInBounds(min, max);
 
-            var point =  _pointFactory.Create(parent);
+            var point = _pointFactory.Create(parent);
             point.transform.position = randomPosition;
             _viewList.Add(point);
         }
@@ -53,5 +54,22 @@ public class PointService
         float randomY = Random.Range(min.y, max.y);
         Vector3 randomPosition = new Vector3(randomX, randomY, 0);
         return randomPosition;
+    }
+
+    public List<Vector3> Get(Vector3 targetPosition)
+    {
+        var sortList = _viewList
+             .OrderBy(point => Vector3.Distance(point.transform.position, targetPosition))
+             .Take(6)
+             .ToList();
+
+        var points = new List<Vector3>();
+
+        foreach (var point in sortList)
+        {
+            points.Add(point.transform.position);
+        }
+
+        return points;
     }
 }
