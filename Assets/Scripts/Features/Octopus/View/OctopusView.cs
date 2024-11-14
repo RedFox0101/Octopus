@@ -4,6 +4,8 @@ using UnityEngine;
 public class OctopusView : MonoBehaviour
 {
     [SerializeField] private List<CurvedLineDrawer> _curvedLineDrawers;
+    [SerializeField] private OctopusConfig _octopusConfig;
+    public List<CurvedLineDrawer> CurvedLineDrawers => _curvedLineDrawers; 
 
     public void MoveToTarget(Vector3 targetPosition)
     {
@@ -15,7 +17,7 @@ public class OctopusView : MonoBehaviour
     {
         for (int i = 0; i < _curvedLineDrawers.Count; i++)
         {
-            _curvedLineDrawers[i].DrawCurvedLine(transform.position, targetPoints[i]);
+            _curvedLineDrawers[i].DrawCurvedLine(transform.position, targetPoints[i], _octopusConfig.CurvatureFactor);
         }   
     }
 }

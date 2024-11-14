@@ -29,7 +29,7 @@ public class LegAnimationService
     {
         var octopus = _initializationService.OctopusView;
 
-        var points = _pointService.Get(octopus.transform.position);
+        var points = _pointService.GetNearestPositions(octopus.transform.position);
 
         octopus.UpdateLegs(points);
     }

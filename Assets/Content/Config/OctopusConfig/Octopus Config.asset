@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cea4d95ff1e37e0468642ccf19186332, type: 3}
   m_Name: Octopus Config
   m_EditorClassIdentifier: 
-  Speed: 5
+  Speed: 10
+  <CurvatureFactor>k__BackingField: 0.4

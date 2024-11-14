@@ -22,6 +22,23 @@ public class PointService
         SubscribeToSceneSpawnPoints();
     }
 
+    public List<Vector3> GetNearestPositions(Vector3 targetPosition)
+    {
+        var sortList = _viewList
+             .OrderBy(point => Vector3.Distance(point.transform.position, targetPosition))
+             .Take(6)
+             .ToList();
+
+        var points = new List<Vector3>();
+
+        foreach (var point in sortList)
+        {
+            points.Add(point.transform.position);
+        }
+
+        return points;
+    }
+
     private void SubscribeToSceneSpawnPoints()
     {
         _messageBroker.Receive<PointMessage>()
@@ -56,20 +73,4 @@ public class PointService
         return randomPosition;
     }
 
-    public List<Vector3> Get(Vector3 targetPosition)
-    {
-        var sortList = _viewList
-             .OrderBy(point => Vector3.Distance(point.transform.position, targetPosition))
-             .Take(6)
-             .ToList();
-
-        var points = new List<Vector3>();
-
-        foreach (var point in sortList)
-        {
-            points.Add(point.transform.position);
-        }
-
-        return points;
-    }
 }

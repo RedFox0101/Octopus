@@ -4,4 +4,6 @@ using UnityEngine;
 public class OctopusConfig : ScriptableObject
 {
     [field: SerializeField] public float Speed;
+
+    [field: SerializeField] public float CurvatureFactor { get; private set; }
 }

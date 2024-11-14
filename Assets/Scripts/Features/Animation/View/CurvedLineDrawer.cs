@@ -4,7 +4,6 @@ using UnityEngine;
 public class CurvedLineDrawer : MonoBehaviour
 {
     [SerializeField] private int _segmentCount = 20;
-
     private LineRenderer _lineRenderer;
 
 
@@ -14,14 +13,13 @@ public class CurvedLineDrawer : MonoBehaviour
 
     }
 
-    public void DrawCurvedLine(Vector3 currentPosition, Vector3 targetPosition)
+    public void DrawCurvedLine(Vector3 currentPosition, Vector3 targetPosition, float curvatureFactor)
     {
         Vector3 startPosition = currentPosition;
 
-
-        Vector3 controlPoint1 = startPosition + Vector3.up * 2f + Vector3.right * 2f;
-        Vector3 controlPoint2 = targetPosition + Vector3.up * 2f - Vector3.right * 2f;
-
+      
+        Vector3 controlPoint1 = startPosition + Vector3.up * 2f * curvatureFactor + Vector3.right * 2f * curvatureFactor;
+        Vector3 controlPoint2 = targetPosition + Vector3.up * 2f * curvatureFactor - Vector3.right * 2f * curvatureFactor;
 
         _lineRenderer.positionCount = _segmentCount;
         for (int i = 0; i < _segmentCount; i++)
@@ -30,7 +28,6 @@ public class CurvedLineDrawer : MonoBehaviour
             Vector3 pointOnCurve = CalculateBezierPoint(t, startPosition, controlPoint1, controlPoint2, targetPosition);
             _lineRenderer.SetPosition(i, pointOnCurve);
         }
-     
     }
 
     private Vector3 CalculateBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3)

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28eacf8d0c18ad94093c7017c9e5490b, type: 3}
   m_Name: PointConfig
   m_EditorClassIdentifier: 
-  NumberPoins: 40
+  NumberPoins: 150
